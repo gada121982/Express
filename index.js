@@ -1,11 +1,14 @@
 const express = require('express');  
 const app = express(); 
+var cookieParser = require('cookie-parser') ; 
+
 
 const userRoute = require('./routes/user.route') ; 
 app.use(express.json()) ; // for parsing application/json
 app.use(express.urlencoded({ extended: true }));  // for parsing application/x-www-form-urlencoded
 app.set('view engine','pug'); 
 app.set('views','./views'); 
+app.use(cookieParser());
 
 
 

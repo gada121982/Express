@@ -1,6 +1,7 @@
 var db = require('../db') ; 
 const shortid = require('shortid');
 
+
 module.exports.index = (req,res)=>{
          res.render('user/user',{
          users: db.get('user').value()
@@ -21,7 +22,14 @@ module.exports.search = function(req,res){
     });
 }; 
 module.exports.create = (req, res) => {
-
+    
+    /**
+     * khi console.log(req.coookies) này ra thì sever sẽ không đọc đc và mang gt undefint
+     * mún đọc được thì phải cài thêm npm install cookie-parser và require nó . 
+     * có thể lên trang express tìm req.cookie để đọc thêm
+     * https://www.npmjs.com/package/cookie-parser
+     */
+    console.log(req.cookies) ; 
     res.render('user/create');
     
 } ;
