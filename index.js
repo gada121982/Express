@@ -1,9 +1,10 @@
 const express = require('express');  
 const app = express(); 
 var cookieParser = require('cookie-parser') ; 
-
+var authMiddleware = require('./middlewares/auth.middlewares'); 
 
 const userRoute = require('./routes/user.route') ; 
+const authRoute = require('./routes/auth.route') ; 
 app.use(express.json()) ; // for parsing application/json
 app.use(express.urlencoded({ extended: true }));  // for parsing application/x-www-form-urlencoded
 app.set('view engine','pug'); 
@@ -13,14 +14,15 @@ app.use(cookieParser());
 
 
 const port = 3001;  
-app.get('/',function(req,res){
+app.get('/',authMiddleware.requireAuth,function(req,res){
     
    res.render('index',{
        name : 'nguyen vinh hai'
    });
 }) ; 
 app.use(express.static('public')) ;
-app.use('/user',userRoute);
+app.use('/user',authMiddleware.requireAuth,userRoute);
+app.use('/auth',authRoute);
  
 
 app.listen(port, ()=> console.log('examle app listening on port '+port)); 
