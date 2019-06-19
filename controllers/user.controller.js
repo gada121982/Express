@@ -6,6 +6,7 @@ module.exports.index = (req,res)=>{
          res.render('user/user',{
          users: db.get('user').value()
         })
+      
     };
 
 module.exports.search = function(req,res){
@@ -20,6 +21,7 @@ module.exports.search = function(req,res){
     res.render('user/user', {
         users:matchedUsers 
     });
+   
 }; 
 module.exports.create = (req, res) => {
     
