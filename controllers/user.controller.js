@@ -31,7 +31,7 @@ module.exports.create = (req, res) => {
      * có thể lên trang express tìm req.cookie để đọc thêm
      * https://www.npmjs.com/package/cookie-parser
      */
-    console.log(req.cookies) ; 
+     
     res.render('user/create');
     
 } ;
@@ -51,6 +51,9 @@ module.exports.postCreate = (req, res) => {
 
     
     req.body.id = shortid.generate(); 
+    req.body.avatar = req.file.path.split("\\").slice(1).join("\\") ;  
+    console.log(req.body.avatar) ;  
+    console.log(req.body) ; 
     db.get('user').push(req.body).write() ; 
     res.redirect('/user');// chuyển hướng người dùng về trang user. 
     console.log(res.locals); // biến được lưu trong user.validate.js chuyển qua đây
