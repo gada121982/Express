@@ -40,11 +40,15 @@ module.exports.get = (req, res) => {
     
     var id = req.params.id;  
     var user = db.get('user').find({ id: id}).value() ; 
+    if(user)
+    {
     res.render('user/view',{
 
         user: user 
     });
-    
+    return ; 
+    }
+    res.send("Không có trong database");
 
 };
 module.exports.postCreate = (req, res) => {
@@ -52,8 +56,7 @@ module.exports.postCreate = (req, res) => {
     
     req.body.id = shortid.generate(); 
     req.body.avatar = req.file.path.split("\\").slice(1).join("\\") ;  
-    console.log(req.body.avatar) ;  
-    console.log(req.body) ; 
+ 
     db.get('user').push(req.body).write() ; 
     res.redirect('/user');// chuyển hướng người dùng về trang user. 
     console.log(res.locals); // biến được lưu trong user.validate.js chuyển qua đây

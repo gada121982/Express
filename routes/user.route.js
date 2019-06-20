@@ -17,7 +17,7 @@ và từ đó , mỗi khi ng dùng request bất kì 1 req nào thì nó đều 
   * 
   */
 
-router.get('/',authMiddleware.requireAuth,  controller.index); 
+router.get('/',  controller.index); 
 
 router.get('/search',controller.search);
 
